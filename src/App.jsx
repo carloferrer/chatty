@@ -1,12 +1,18 @@
-console.log('App.jsx > import react and whatnot');
 import React, {Component} from 'react';
+import ChatBar from './ChatBar.jsx';
 
 class App extends Component {
+
   render() {
-    console.log('App.jsx > inside render');
     return (
-      <h1>Hello React :)</h1>
+      <div>
+      <nav className="navbar">
+        <a href="/" className="navbar-brand">Chatty</a>
+      </nav>
+     <ChatBar></ChatBar>
+     </div>
     );
   }
+
 }
 export default App;
