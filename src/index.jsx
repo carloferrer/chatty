@@ -1,6 +1,7 @@
 // Application entrypoint.
 
 // Load up the application styles
+console.log('index.jsx > loading application styles');
 require('../styles/application.scss');
 
 // Render the top-level React component
