@@ -27,14 +27,22 @@ class App extends Component {
 
   componentDidMount() {
     /// WEBSOCKETS
-    var chattySocket = new WebSocket("ws://0.0.0.0:3001");
-    console.log('Connected to 0.0.0.0:3001.');
+    let socket = new WebSocket("ws://0.0.0.0:3001");
+    console.log('Connecting to 0.0.0.0:3001.');
+
+    socket.onopen = function(event) {
+      socket.send("Hello from the other side.");
+    }
+    // socket.on('open', function open() {
+    //   socket.send("Here's some stuff from App.jsx.");
+    // });
 
     setTimeout(() => {
       console.log("Simulating incoming message");
       const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
       const messages = this.state.messages.concat(newMessage)
       this.setState({messages: messages})
+
     }, 3000);
   }
 
