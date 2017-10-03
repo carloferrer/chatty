@@ -23,6 +23,9 @@ class App extends Component {
     }
   }
 
+  //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
+
+
   componentDidMount() {
     console.log("componentDidMount <App />");
     setTimeout(() => {
@@ -34,6 +37,18 @@ class App extends Component {
       // Calling setState will trigger a call to render() in App and all child components.
       this.setState({messages: messages})
     }, 3000);
+
+
+  }
+
+  // USER-ACTION
+  onSubmitMsg = (newMsg) => {
+    //create new array
+    //read up on spread operator
+    //take existing array - throw thing after comma onto end of array
+    const messages = [...this.state.messages, {id: 4, username: 'foo', content: newMsg}];
+    //render array again
+    this.setState({messages})
   }
 
   render() {
@@ -43,7 +58,7 @@ class App extends Component {
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
-        <ChatBar name={this.state.currentUser.name}/>
+        <ChatBar name={this.state.currentUser.name} onSubmitMsg={this.onSubmitMsg}/>
         <MessageList messages={this.state.messages}/>
       </div>
     );
