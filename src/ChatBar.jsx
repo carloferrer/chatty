@@ -5,7 +5,11 @@ class ChatBar extends Component {
 // USER-ACTION
   constructor(props) {
     super(props);
-    this.state = {id: '', username: this.props.name, content: ''}
+    this.state = {
+      id: '',
+      username: this.props.name,
+      content: ''
+    }
   }
 
   handleUsernameUpdate = (event) => {

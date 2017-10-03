@@ -25,8 +25,11 @@ class App extends Component {
 
   //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
 
-
   componentDidMount() {
+    /// WEBSOCKETS
+    var chattySocket = new WebSocket("ws://0.0.0.0:3001");
+    console.log('Connected to 0.0.0.0:3001.');
+
     setTimeout(() => {
       console.log("Simulating incoming message");
       const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
@@ -34,7 +37,6 @@ class App extends Component {
       this.setState({messages: messages})
     }, 3000);
   }
-
 
 
   // USER-ACTION
