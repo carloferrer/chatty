@@ -21,20 +21,22 @@ class App extends Component {
         }
       ]
     }
+    this.socket;
   }
 
   //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
 
   componentDidMount() {
     /// WEBSOCKETS
-    let socket = new WebSocket("ws://0.0.0.0:3001");
+    this.socket = new WebSocket("ws://0.0.0.0:3001");
     console.log('Connecting to 0.0.0.0:3001.');
 
-    socket.onopen = function(event) {
-      socket.send("Hello from the other side.");
-    }
-    // socket.on('open', function open() {
-    //   socket.send("Here's some stuff from App.jsx.");
+    // socket.onopen = function(event) {
+    //   socket.send("Hello from the other side.");
+    // }
+
+    // this.socket.addEventListener('open', function(event) {
+    //   this.socket.send('Hello Server!');
     // });
 
     setTimeout(() => {
@@ -54,10 +56,13 @@ class App extends Component {
     //read up on spread operator
     //take existing array - throw thing after comma onto end of array
 
+    // socket.addEventListener('open', function(event) {
+      this.socket.send(newUser+' says: "'+newMsg+'"');
+    // });
+
     let messages = [...this.state.messages, {id: newID, username: newUser, content: newMsg}];
 
     //render array again
-
     this.setState({messages})
   }
 
