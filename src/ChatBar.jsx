@@ -53,7 +53,6 @@ class ChatBar extends Component {
   }
 }
 
-// onchange
 // in chatbar, update the state
 // then give state as arguments to callback function
 // the payload is this.state.whatever
