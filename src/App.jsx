@@ -41,15 +41,21 @@ class App extends Component {
 
   }
 
+
+
   // USER-ACTION
-  onSubmitMsg = (newMsg) => {
+  onSubmitMsg = (newID, newUser, newMsg) => {
     //create new array
     //read up on spread operator
     //take existing array - throw thing after comma onto end of array
-    const messages = [...this.state.messages, {id: 4, username: 'foo', content: newMsg}];
+    let messages = [...this.state.messages, {id: newID, username: newUser, content: newMsg}];
     //render array again
     this.setState({messages})
   }
+
+  // onSubmitUser = (newUser) => {
+
+  // }
 
   render() {
 
