@@ -27,8 +27,8 @@ wss.on('connection', (client) => {
 
     let message = JSON.parse(incoming);
     message.id = uuidv1();
-    console.log(message);
-    // wss.broadcast(message);
+    // console.log(message);
+    wss.broadcast(JSON.stringify(message));
   });
 
   client.on('close', () => console.log('Client disconnected'));
