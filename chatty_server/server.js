@@ -20,8 +20,12 @@ wss.broadcast = function broadcast(data) {
   });
 };
 
-wss.on('connection', (client) => {
-  console.log('Client connected');
+wss.on('connection', (client, req) => {
+  let ip = [];
+  ip.push(req.connection.remoteAddress);
+  console.log(ip);
+  // console.log(Object.keys(wss.clients));
+  // console.log('Client connected');
 
   client.on('message', function incoming(incoming) {
 
