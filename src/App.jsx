@@ -6,21 +6,12 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       currentUser: {name: "Bob"},
-      messages: [
-        {
-          id: 0,
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-        },
-        {
-          id: 1,
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-        }
-      ]
+      messages: []
     }
+
     this.socket;
   }
 
@@ -31,21 +22,9 @@ class App extends Component {
     this.socket = new WebSocket("ws://0.0.0.0:3001");
     console.log('Connecting to 0.0.0.0:3001.');
 
-    // socket.onopen = function(event) {
-    //   socket.send("Hello from the other side.");
-    // }
-
-    // this.socket.addEventListener('open', function(event) {
-    //   this.socket.send('Hello Server!');
-    // });
-
-    setTimeout(() => {
-      console.log("Simulating incoming message");
-      const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
-      const messages = this.state.messages.concat(newMessage)
-      this.setState({messages: messages})
-
-    }, 3000);
+    this.socket.onmessage = (event) => {
+      console.log('EVENT');
+    }
   }
 
 
@@ -56,9 +35,7 @@ class App extends Component {
     //read up on spread operator
     //take existing array - throw thing after comma onto end of array
 
-    // socket.addEventListener('open', function(event) {
-      this.socket.send(newUser+' says: "'+newMsg+'"');
-    // });
+    this.socket.send(JSON.stringify({newUser, newMsg}));
 
     let messages = [...this.state.messages, {id: newID, username: newUser, content: newMsg}];
 

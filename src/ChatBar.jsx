@@ -25,7 +25,7 @@ class ChatBar extends Component {
       this.setState({id: Date.now()});
 
       this.props.onSubmitMsg(this.state.id, this.state.username, this.state.content);
-      console.log(`${Number((this.state.id))}\n${this.state.username}: ${this.state.content}`);
+
       this.setState({content: ''});
     }
   }
