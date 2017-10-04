@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
 
+var uuidv1 = require('uuid/v1');
+
 class ChatBar extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      current: this.props.name,
-      id: Date.now(),
-      username: this.props.name,
-      content: ''
+      currentName: { this.props.name },
+      message: {
+        id: '',
+        username: this.props.name,
+        content: ''
     }
   }
 
   handleUsernameUpdate = (event) => {
-    this.setState({username: event.target.value});
     this.setState({current: event.target.value});
+    this.setState({username: event.target.value});
   }
 
   handleContentUpdate = (event) => {
@@ -23,7 +26,7 @@ class ChatBar extends Component {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      this.setState({id: Date.now()});
+      this.setState({id: uuidv1()});
 
       this.props.onSubmitMsg(this.state.current, this.state.id, this.state.username, this.state.content);
 

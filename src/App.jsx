@@ -15,8 +15,6 @@ class App extends Component {
     this.socket;
   }
 
-  //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
-
   componentDidMount() {
     this.socket = new WebSocket("ws://0.0.0.0:3001");
     console.log('Connecting to 0.0.0.0:3001.');
@@ -31,12 +29,12 @@ class App extends Component {
     }
   }
 
-
   onSubmitMsg = (current, newID, newUser, newMsg) => {
 
     this.socket.send(JSON.stringify({newID, newUser, newMsg}));
 
     this.setState({currentUser: {name: current}});
+
     console.log(`You've changed your username!\n${this.state.currentUser.name} >> ${current}`);
   }
 
