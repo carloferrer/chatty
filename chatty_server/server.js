@@ -27,10 +27,10 @@ wss.on('connection', (client, req) => {
   // console.log(wss.clients.values());
   // console.log('Client connected');
 
-  let connected = wss.clients.size;
+  let connected = { connected: `Chatters online: ${wss.clients.size}` };
 
   console.log(connected);
-  wss.broadcast(connected);
+  wss.broadcast(JSON.stringify(connected));
 
   client.on('message', function incoming(incoming) {
 

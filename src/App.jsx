@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       currentUser: {name: "Bob"},
       messages: [],
-      update: ''
+      online: ''
     }
 
     this.socket;
@@ -21,15 +21,21 @@ class App extends Component {
     console.log('Connecting to 0.0.0.0:3001.');
 
     this.socket.onmessage = (event) => {
-      let msg = JSON.parse(event.data);
+      let incoming = JSON.parse(event.data);
 
-      if (msg.notify) {
-        console.log(msg.notify);
+      if(incoming.connected) {
+        this.setState({online: incoming.connected})
+        console.log(this.state);
       }
 
-    let messages = [...this.state.messages, {id: msg.id, username: msg.user, content: msg.content, update: msg.notify}];
-
-    this.setState({messages})
+      if(incoming.id) {
+        let msg = JSON.parse(event.data);
+        if (msg.notify) {
+          console.log(msg.notify);
+        }
+        let messages = [...this.state.messages, {id: msg.id, username: msg.user, content: msg.content, update: msg.notify}];
+        this.setState({messages})
+      }
     }
   }
 
@@ -49,6 +55,7 @@ class App extends Component {
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
+          <div className="navbar-online">{this.state.online}</div>
         </nav>
         <ChatBar name={this.state.currentUser.name} onSubmitMsg={this.onSubmitMsg}/>
         <MessageList messages={this.state.messages}/>
