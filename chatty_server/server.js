@@ -8,7 +8,7 @@ const PORT = 3001;
 
 const server = express()
   .use(express.static('public'))
-  .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${ PORT }`));
+  .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on port: ${ PORT }`));
 
 const wss = new WebSocket.Server({ server });
 
@@ -21,22 +21,17 @@ wss.broadcast = function broadcast(data) {
 };
 
 wss.on('connection', (client, req) => {
-  // let ip = [];
-  // ip.push(req.connection.remoteAddress);
-  // console.log(ip);
-  // console.log(wss.clients.values());
-  // console.log('Client connected');
 
-  let connected = { connected: `Chatters online: ${wss.clients.size}` };
-
-  console.log(connected);
+  // Broadcast to all connected users to display number of users online.
+  let connected = { connected: wss.clients.size };
   wss.broadcast(JSON.stringify(connected));
 
+  // Upon message submission, generated unique ID for message, and broadcast back to connected users.
   client.on('message', function incoming(incoming) {
-
     let message = JSON.parse(incoming);
     message.id = uuidv1();
 
+    // If the user changes their name, notify the rest of the users.
     if (message.oldCurrent !== message.user) {
       message.notify = `${message.oldCurrent} changed name to ${message.user}!`;
     }

@@ -24,7 +24,9 @@ class App extends Component {
       let incoming = JSON.parse(event.data);
 
       if(incoming.connected) {
-        this.setState({online: incoming.connected})
+        let connect_msg = `Chatters online: ${incoming.connected}`;
+
+        this.setState({online: connect_msg})
         console.log(this.state);
       }
 
