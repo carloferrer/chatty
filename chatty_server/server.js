@@ -21,11 +21,16 @@ wss.broadcast = function broadcast(data) {
 };
 
 wss.on('connection', (client, req) => {
-  let ip = [];
-  ip.push(req.connection.remoteAddress);
-  console.log(ip);
-  // console.log(Object.keys(wss.clients));
+  // let ip = [];
+  // ip.push(req.connection.remoteAddress);
+  // console.log(ip);
+  // console.log(wss.clients.values());
   // console.log('Client connected');
+
+  let connected = wss.clients.size;
+
+  console.log(connected);
+  wss.broadcast(connected);
 
   client.on('message', function incoming(incoming) {
 
