@@ -25,7 +25,10 @@ class ChatBar extends Component {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
+<<<<<<< HEAD
 
+=======
+>>>>>>> notify
       this.props.onSubmitMsg(
         this.state.currentUser,
         this.state.username,

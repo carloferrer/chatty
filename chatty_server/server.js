@@ -28,6 +28,14 @@ wss.on('connection', (client) => {
     let message = JSON.parse(incoming);
     message.id = uuidv1();
 
+<<<<<<< HEAD
+=======
+    if (message.oldCurrent !== message.user) {
+      message.notify = `${message.oldCurrent} changed name to ${message.user}`;
+    }
+
+    console.log(message);
+>>>>>>> notify
     wss.broadcast(JSON.stringify(message));
   });
 
