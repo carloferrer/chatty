@@ -46,15 +46,14 @@ class App extends Component {
   }
 
   onSubmitMsg = (user, content) => {
-    // The original username is this state's currentUser.name.
     this.setState({currentUser: {name: user}});
+
+    // The original username is this state's currentUser.name.
     let oldCurrent = this.state.currentUser.name;
 
     this.socket.send(JSON.stringify(
       {oldCurrent, user, content}
     ));
-
-
   }
 
   render() {
