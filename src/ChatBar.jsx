@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 
 class ChatBar extends Component {
 
-// USER-ACTION
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
+      current: this.props.name,
+      id: Date.now(),
       username: this.props.name,
       content: ''
     }
@@ -14,6 +14,7 @@ class ChatBar extends Component {
 
   handleUsernameUpdate = (event) => {
     this.setState({username: event.target.value});
+    this.setState({current: event.target.value});
   }
 
   handleContentUpdate = (event) => {
@@ -24,7 +25,7 @@ class ChatBar extends Component {
     if (event.key === 'Enter') {
       this.setState({id: Date.now()});
 
-      this.props.onSubmitMsg(this.state.id, this.state.username, this.state.content);
+      this.props.onSubmitMsg(this.state.current, this.state.id, this.state.username, this.state.content);
 
       this.setState({content: ''});
     }
@@ -57,7 +58,4 @@ class ChatBar extends Component {
   }
 }
 
-// in chatbar, update the state
-// then give state as arguments to callback function
-// the payload is this.state.whatever
 export default ChatBar;

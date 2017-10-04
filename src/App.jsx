@@ -22,18 +22,22 @@ class App extends Component {
     console.log('Connecting to 0.0.0.0:3001.');
 
     this.socket.onmessage = (event) => {
-      console.log('EVENT');
+      let msg = JSON.parse(event.data);
+      console.log(msg);
+
+    let messages = [...this.state.messages, {id: msg.newID, username: msg.newUser, content: msg.newMsg}];
+
+    this.setState({messages})
     }
   }
 
 
-  onSubmitMsg = (newID, newUser, newMsg) => {
+  onSubmitMsg = (current, newID, newUser, newMsg) => {
 
-    this.socket.send(JSON.stringify({newUser, newMsg}));
+    this.socket.send(JSON.stringify({newID, newUser, newMsg}));
 
-    let messages = [...this.state.messages, {id: newID, username: newUser, content: newMsg}];
-
-    this.setState({messages})
+    this.setState({currentUser: {name: current}});
+    console.log(`You've changed your username!\n${this.state.currentUser.name} >> ${current}`);
   }
 
   render() {
