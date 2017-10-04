@@ -29,13 +29,13 @@ class App extends Component {
     }
   }
 
-  onSubmitMsg = (current, newID, newUser, newMsg) => {
+  onSubmitMsg = (current, user, msg) => {
 
-    this.socket.send(JSON.stringify({newID, newUser, newMsg}));
+    this.socket.send(JSON.stringify({user, msg}));
 
     this.setState({currentUser: {name: current}});
 
-    console.log(`You've changed your username!\n${this.state.currentUser.name} >> ${current}`);
+    // console.log(`You've changed your username!\n${this.state.currentUser.name} >> ${current}`);
   }
 
   render() {

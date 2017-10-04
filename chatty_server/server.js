@@ -2,6 +2,7 @@
 
 const express = require('express');
 const WebSocket = require('ws');
+const uuidv1 = require('uuid/v1');
 
 const PORT = 3001;
 
@@ -25,6 +26,7 @@ wss.on('connection', (client) => {
   client.on('message', function incoming(incoming) {
 
     let message = JSON.parse(incoming);
+    message.id = uuidv1();
     console.log(message);
     // wss.broadcast(message);
   });
