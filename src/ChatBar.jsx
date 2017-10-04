@@ -25,8 +25,6 @@ class ChatBar extends Component {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      console.log(`username: ${this.state.username}\ncurrentUser: ${this.state.currentUser}\ncontent: ${this.state.content}`);
-
       this.props.onSubmitMsg(
         this.state.currentUser,
         this.state.username,

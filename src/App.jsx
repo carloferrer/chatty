@@ -9,7 +9,8 @@ class App extends Component {
 
     this.state = {
       currentUser: {name: "Bob"},
-      messages: []
+      messages: [],
+      update: ''
     }
 
     this.socket;
@@ -22,19 +23,26 @@ class App extends Component {
     this.socket.onmessage = (event) => {
       let msg = JSON.parse(event.data);
       console.log(msg);
+      if (msg.notify) {
+        console.log(msg.notify);
+      }
 
-    let messages = [...this.state.messages, {id: msg.id, username: msg.user, content: msg.content}];
+    let messages = [...this.state.messages, {id: msg.id, username: msg.user, content: msg.content, update: msg.notify}];
+
+    console.log(messages);
 
     this.setState({messages})
     }
   }
 
   onSubmitMsg = (current, user, content) => {
+    let oldCurrent = this.state.currentUser.name;
 
-    this.socket.send(JSON.stringify({user, content}));
+    this.socket.send(JSON.stringify(
+      {oldCurrent, user, content}
+    ));
+
     this.setState({currentUser: {name: current}});
-
-    // console.log(`You've changed your username!\n${this.state.currentUser.name} >> ${current}`);
   }
 
   render() {
