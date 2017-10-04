@@ -21,6 +21,7 @@ class App extends Component {
 
     this.socket.onmessage = (event) => {
       let msg = JSON.parse(event.data);
+
       console.log(msg);
 
     let messages = [...this.state.messages, {id: msg.id, username: msg.user, content: msg.content}];
