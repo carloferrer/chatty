@@ -18,7 +18,6 @@ class App extends Component {
   //https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
 
   componentDidMount() {
-    /// WEBSOCKETS
     this.socket = new WebSocket("ws://0.0.0.0:3001");
     console.log('Connecting to 0.0.0.0:3001.');
 
@@ -28,18 +27,12 @@ class App extends Component {
   }
 
 
-  // USER-ACTION
   onSubmitMsg = (newID, newUser, newMsg) => {
-
-    //create new array
-    //read up on spread operator
-    //take existing array - throw thing after comma onto end of array
 
     this.socket.send(JSON.stringify({newUser, newMsg}));
 
     let messages = [...this.state.messages, {id: newID, username: newUser, content: newMsg}];
 
-    //render array again
     this.setState({messages})
   }
 
