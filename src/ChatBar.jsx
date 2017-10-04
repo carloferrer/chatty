@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 
-var uuidv1 = require('uuid/v1');
-
 class ChatBar extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       currentUser: this.props.name,
-
       username: this.props.name,
       content: ''
     }

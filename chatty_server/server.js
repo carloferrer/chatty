@@ -31,9 +31,9 @@ wss.on('connection', (client, req) => {
     let message = JSON.parse(incoming);
     message.id = uuidv1();
 
-    // If the user changes their name, notify the rest of the users.
+    // If the user changes their name, notify the rest of the users by adding another object key that will be handled on the client side.
     if (message.oldCurrent !== message.user) {
-      message.notify = `${message.oldCurrent} changed name to ${message.user}!`;
+      message.notify = message.oldCurrent;
     }
 
     console.log(message);
