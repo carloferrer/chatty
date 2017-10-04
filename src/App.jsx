@@ -23,16 +23,15 @@ class App extends Component {
       let msg = JSON.parse(event.data);
       console.log(msg);
 
-    let messages = [...this.state.messages, {id: msg.newID, username: msg.newUser, content: msg.newMsg}];
+    let messages = [...this.state.messages, {id: msg.id, username: msg.user, content: msg.content}];
 
     this.setState({messages})
     }
   }
 
-  onSubmitMsg = (current, user, msg) => {
+  onSubmitMsg = (current, user, content) => {
 
-    this.socket.send(JSON.stringify({user, msg}));
-
+    this.socket.send(JSON.stringify({user, content}));
     this.setState({currentUser: {name: current}});
 
     // console.log(`You've changed your username!\n${this.state.currentUser.name} >> ${current}`);

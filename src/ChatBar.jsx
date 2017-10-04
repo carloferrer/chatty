@@ -15,14 +15,8 @@ class ChatBar extends Component {
   }
 
   handleUsernameUpdate = (event) => {
-    this.setState({
-      currentUser: event.target.value,
-    });
-
+    this.setState({currentUser: event.target.value});
     this.setState({username: event.target.value});
-
-    // console.log(this.state.currentUser.name);
-    // console.log(this.state.message.username);
   }
 
   handleContentUpdate = (event) => {
