@@ -23,14 +23,11 @@ class App extends Component {
     this.socket.onmessage = (event) => {
       let msg = JSON.parse(event.data);
 
-      console.log(msg);
       if (msg.notify) {
         console.log(msg.notify);
       }
 
     let messages = [...this.state.messages, {id: msg.id, username: msg.user, content: msg.content, update: msg.notify}];
-
-    console.log(messages);
 
     this.setState({messages})
     }
